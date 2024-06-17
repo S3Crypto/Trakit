@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trakit", "Trakit\Trakit.csproj", "{2005F026-020F-465A-8BE6-3826829CC53A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2005F026-020F-465A-8BE6-3826829CC53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2005F026-020F-465A-8BE6-3826829CC53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2005F026-020F-465A-8BE6-3826829CC53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2005F026-020F-465A-8BE6-3826829CC53A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8B0511B-436B-4C4D-9119-155C7AB1E63B}
+	EndGlobalSection
+EndGlobal

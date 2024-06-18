@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Trakit</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
@@ -19,7 +20,12 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <!-- Add more navigation links here -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Habits" asp-action="Complete">Complete Habit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Habits" asp-action="Progress">View Progress</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     @if (User.Identity.IsAuthenticated)

@@ -1,0 +1,38 @@
+﻿@model Habit
+
+<h2>Progress for @Model.Name</h2>
+
+<div>
+    <canvas id="progressChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('progressChart').getContext('2d');
+    var progressChart = new Chart(ctx, {
+        type: 'line', // You can choose other types like 'bar', 'pie', etc.
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.Completions.Select(c => c.CompletionDate.ToShortDateString()))),
+            datasets: [{
+                label: 'Habit Completion',
+                data: @Html.Raw(Json.Serialize(Model.Completions.Select(c => c.CompletionDate))),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    }
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

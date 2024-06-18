@@ -1,26 +1,40 @@
 ﻿<Properties StartupConfiguration="{2005F026-020F-465A-8BE6-3826829CC53A}|https">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../../usr/local/share/dotnet/sdk/7.0.316/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.TargetFrameworkInference.targets">
+  <MonoDevelop.Ide.ItemProperties.Trakit PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Trakit/Data/ApplicationDbContextFactory.cs">
     <Files>
       <File FileName="Trakit/.gitignore" />
-      <File FileName="Trakit/appsettings.json" Line="11" Column="4" />
+      <File FileName="Trakit/appsettings.json" />
       <File FileName="Trakit/Program.cs" />
+      <File FileName="Trakit/Models/Habit.cs" Line="9" Column="43" />
+      <File FileName="Trakit/Models/ApplicationUser.cs" Line="3" Column="2" />
+      <File FileName="Trakit/Models/HabitCompletion.cs" Line="10" Column="2" />
+      <File FileName="Trakit/Models/Goal.cs" Line="14" Column="1" />
+      <File FileName="Trakit/Models/TrakitDbContext.cs" Line="15" Column="10" />
+      <File FileName="Trakit/Startup.cs" />
+      <File FileName="Trakit/Data/ApplicationDbContext.cs" Line="22" Column="1" />
+      <File FileName="Trakit/Data/ApplicationDbContextFactory.cs" Line="21" Column="10" />
       <File FileName="../../../usr/local/share/dotnet/sdk/7.0.316/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.TargetFrameworkInference.targets" Line="151" Column="5" />
+      <File FileName="Trakit/Models/ErrorViewModel.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Trakit" expanded="True">
-            <Node name="Trakit" expanded="True" selected="True" />
+          <Node name="Trakit">
+            <Node name="Trakit">
+              <Node name="Data">
+                <Node name="ApplicationDbContextFactory.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.Trakit PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

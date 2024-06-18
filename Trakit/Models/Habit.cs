@@ -12,4 +12,3 @@
         public ICollection<HabitCompletion> Completions { get; set; }
     }
 }
-

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Trakit.Models;
 
 namespace Trakit.Data
 {
@@ -8,6 +9,8 @@ namespace Trakit.Data
             : base(options)
         {
         }
+        public DbSet<Trakit.Models.Habit> Habit { get; set; } = default!;
+        public DbSet<Trakit.Models.Goal> Goal { get; set; } = default!;
 
         // DbSet properties representing your entities
         // public DbSet<YourEntity> YourEntities { get; set; }

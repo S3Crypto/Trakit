@@ -19,13 +19,12 @@ namespace YourAppName
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add DbContext and specify connection string
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Other services configuration
-            services.AddControllersWithViews();
         }
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

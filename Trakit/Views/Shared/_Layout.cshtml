@@ -58,6 +58,10 @@
         @RenderBody()
     </div>
 
+    <div id="chat-icon" class="chat-icon">
+        <i class="fas fa-comments"></i>
+    </div>
+
     <!-- Chat Panel -->
     <div id="chatPanel" class="chat-panel">
         <div class="chat-header">
@@ -67,6 +71,7 @@
         <div class="chat-messages" id="chatMessages">
             <!-- Messages will be dynamically loaded here -->
         </div>
+        <button id="composeButton" class="compose-button"><i class="fas fa-paper-plane"></i></button>
     </div>
 
     <!-- Message Pop-up Modal -->
@@ -75,6 +80,18 @@
             <span class="close" id="closeMessageModal">&times;</span>
             <div id="messageContent">
                 <!-- Message content will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Compose Message Modal -->
+    <div id="composeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeComposeModal">&times;</span>
+            <div>
+                <h4>Compose New Message</h4>
+                <textarea id="composeTextarea" class="form-control" rows="4" placeholder="Write your message here..."></textarea>
+                <button id="sendButton" class="btn btn-primary mt-3">Send</button>
             </div>
         </div>
     </div>

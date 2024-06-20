@@ -15,6 +15,7 @@ namespace Trakit.Data
         // DbSets for your entities
         public DbSet<Habit> Habits { get; set; }
         public DbSet<Goal> Goals { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

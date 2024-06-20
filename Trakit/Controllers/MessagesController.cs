@@ -10,7 +10,7 @@ using Trakit.Models;
 
 namespace Trakit.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class MessagesController : ControllerBase
     {
@@ -30,7 +30,7 @@ namespace Trakit.Controllers
             return Ok(messages);
         }
 
-        [HttpPost]
+        [HttpPost("Send")]
         public async Task<IActionResult> SendMessage([FromBody] Message message)
         {
             if (!ModelState.IsValid)

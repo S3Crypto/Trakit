@@ -24,6 +24,18 @@ namespace Trakit
             // Add services to the container
             services.AddControllersWithViews();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigins",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://example.com")
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
+
+
             // Configure Entity Framework Core with SQL Server
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -49,6 +61,8 @@ namespace Trakit
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseCors("AllowSpecificOrigins");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

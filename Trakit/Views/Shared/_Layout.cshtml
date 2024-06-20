@@ -111,6 +111,9 @@
         </div>
     </footer>
     <script src="~/js/chat.js"></script>
+    <script>
+        var senderId = '@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value';
+    </script>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

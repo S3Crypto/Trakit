@@ -15,6 +15,7 @@
         var sendButton = document.getElementById('sendButton');
         var recipientDropdown = document.getElementById('recipientDropdown');
         var composeTextarea = document.getElementById('composeTextarea');
+        var senderId = window.senderId;
 
         // Toggle the chat panel visibility
         if (chatIcon) {
@@ -55,18 +56,22 @@
         // Send button logic
         if (sendButton) {
             sendButton.addEventListener('click', function () {
-                var recipientId = recipientDropdown.value;
-                var message = composeTextarea.value;
+                var userId = recipientDropdown.value;
+                var messageContent = composeTextarea.value;
 
-                if (recipientId && message) {
+                if (userId && messageContent) {
                     // Send the message via AJAX
+                    var message = {
+                        userId: userId,
+                        senderId: senderId,
+                        messageContent: messageContent
+                    };
+
                     $.ajax({
                         url: '/Messages/Send', // Adjust the endpoint to your message sending API
                         type: 'POST',
-                        data: {
-                            recipientId: recipientId,
-                            message: message
-                        },
+                        contentType: 'application/json',
+                        data: JSON.stringify(message),
                         success: function (response) {
                             alert('Message sent successfully!');
                             // Clear the input fields after sending

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using Trakit.Data; // Ensure this namespace is correct
+using Trakit.Data;
 using Trakit.Models;
 
 namespace Trakit.Controllers
@@ -15,7 +15,6 @@ namespace Trakit.Controllers
             _context = context;
         }
 
-        // GET: Goals
         public async Task<IActionResult> Index()
         {
             var goals = await _context.Goals.ToListAsync();

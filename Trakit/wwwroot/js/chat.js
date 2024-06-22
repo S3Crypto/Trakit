@@ -1,6 +1,5 @@
 ﻿var TrakitChat = (function () {
     var init = function () {
-        // Get elements
         var chatIcon = document.getElementById('chat-icon');
         var chatPanel = document.getElementById('chatPanel');
         var closeButton = document.getElementById('closeChatPanel');
@@ -14,7 +13,7 @@
         var messageModal = document.getElementById('messageModal');
         var messageContent = document.getElementById('messageContent');
         var closeMessageModal = document.getElementById('closeMessageModal');
-        var senderId = window.senderId; // Assuming senderId is set globally
+        var senderId = window.senderId;
 
         // Toggle the chat panel visibility
         if (chatIcon) {
@@ -76,7 +75,7 @@
                     $.ajax({
                         url: '/Messages/Send',
                         type: 'POST',
-                        contentType: 'application/json', // Ensure sending JSON payload
+                        contentType: 'application/json',
                         data: JSON.stringify({
                             userId: recipientId,
                             senderId: senderId,
@@ -84,10 +83,8 @@
                         }),
                         success: function (response) {
                             alert('Message sent successfully!');
-                            // Clear the input fields after sending
                             recipientDropdown.value = '';
                             composeTextarea.value = '';
-                            // Close the modal
                             composeModal.style.display = 'none';
                         },
                         error: function (xhr, status, error) {
@@ -103,10 +100,10 @@
         // Function to load messages
         var loadMessages = function (userId) {
             $.ajax({
-                url: '/Messages/' + userId, // Adjust the endpoint to your API
+                url: '/Messages/' + userId,
                 type: 'GET',
                 success: function (messages) {
-                    chatMessages.innerHTML = ''; // Clear existing messages
+                    chatMessages.innerHTML = '';
                     messages.forEach(function (message) {
                         var card = document.createElement('div');
                         card.className = 'message-card';
@@ -141,10 +138,10 @@
         // Function to load users into the dropdown
         var loadUsers = function () {
             $.ajax({
-                url: '/Home/GetUsers', // Adjust the endpoint to your user list API
+                url: '/Home/GetUsers',
                 type: 'GET',
                 success: function (users) {
-                    recipientDropdown.innerHTML = ''; // Clear existing options
+                    recipientDropdown.innerHTML = '';
                     users.forEach(function (user) {
                         var option = document.createElement('option');
                         option.value = user.id;

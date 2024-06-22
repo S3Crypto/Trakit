@@ -43,7 +43,8 @@
 }
 
     .message-card:hover {
-        background-color: #f9f9f9;
+        background-color: #e2e2e2;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
 .message-sender,

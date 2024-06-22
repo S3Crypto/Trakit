@@ -1,168 +1,109 @@
-﻿/* Style for the floating chat icon */
-.chat-icon {
+﻿.chat-panel {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #007bff;
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    z-index: 1000;
-    font-size: 24px;
-}
-
-    /* Hover effect for the chat icon */
-    .chat-icon:hover {
-        background-color: #0056b3;
-    }
-
-/* Style for the chat panel */
-.chat-panel {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
+    right: 0;
+    bottom: 0;
     width: 300px;
     height: 400px;
     background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    display: none; /* Hidden by default */
+    border: 1px solid #ccc;
+    display: none;
     flex-direction: column;
-    z-index: 1000;
 }
 
-    /* Show the chat panel when the 'show' class is added */
     .chat-panel.show {
         display: flex;
     }
 
-/* Style for the chat header */
 .chat-header {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
 }
 
-    /* Style for the close button in the chat header */
-    .chat-header button {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-/* Style for the chat messages container */
-.chat-messages {
-    flex-grow: 1;
-    padding: 10px;
-    overflow-y: auto;
-    border-bottom: 1px solid #ddd;
-}
-
-/* Style for individual message cards */
-.message-card {
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
+.close-button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
     cursor: pointer;
 }
 
-    /* Hover effect for message cards */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.message-card {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
     .message-card:hover {
-        background-color: #e9ecef;
+        background-color: #f9f9f9;
     }
 
-/* Style for the compose button */
+.message-sender,
+.message-content-preview,
+.message-timestamp {
+    margin: 0;
+}
+
 .compose-button {
     background-color: #007bff;
     color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
     border: none;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
 }
 
-    /* Hover effect for the compose button */
     .compose-button:hover {
         background-color: #0056b3;
     }
 
-/* Style for the message modal */
+/* Modal Styles */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     justify-content: center;
     align-items: center;
 }
 
-/* Style for modal content */
 .modal-content {
-    background-color: white;
-    border-radius: 8px;
+    background-color: #fefefe;
+    margin: auto;
     padding: 20px;
+    border: 1px solid #888;
     width: 80%;
     max-width: 500px;
-    margin: auto;
     position: relative;
 }
 
-    /* Style for the close button in the modal */
-    .modal-content .close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
+.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
         cursor: pointer;
     }
-
-        /* Hover effect for the close button */
-        .modal-content .close:hover,
-        .modal-content .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-/* Styling adjustments for the modal content */
-#messageContent,
-#composeTextarea {
-    margin-top: 20px;
-}
-
-/* Style for the send button */
-#sendButton {
-    width: 100%;
-}

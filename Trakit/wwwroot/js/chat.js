@@ -1,26 +1,28 @@
 ﻿var TrakitChat = (function () {
-    var observer = new MutationObserver(function (mutations) {
-        // Observer logic if needed
-    });
-
     var init = function () {
         // Get elements
         var chatIcon = document.getElementById('chat-icon');
         var chatPanel = document.getElementById('chatPanel');
         var closeButton = document.getElementById('closeChatPanel');
-        var messageCards = document.querySelectorAll('.message-card');
         var composeButton = document.getElementById('composeButton');
         var composeModal = document.getElementById('composeModal');
         var closeComposeModal = document.getElementById('closeComposeModal');
         var sendButton = document.getElementById('sendButton');
         var recipientDropdown = document.getElementById('recipientDropdown');
         var composeTextarea = document.getElementById('composeTextarea');
-        var senderId = window.senderId;
+        var chatMessages = document.getElementById('chatMessages');
+        var messageModal = document.getElementById('messageModal');
+        var messageContent = document.getElementById('messageContent');
+        var closeMessageModal = document.getElementById('closeMessageModal');
+        var senderId = window.senderId; // Assuming senderId is set globally
 
         // Toggle the chat panel visibility
         if (chatIcon) {
             chatIcon.addEventListener('click', function () {
                 chatPanel.classList.toggle('show');
+                if (chatPanel.classList.contains('show')) {
+                    loadMessages(senderId);
+                }
             });
         }
 
@@ -51,27 +53,35 @@
             if (event.target == composeModal) {
                 composeModal.style.display = 'none';
             }
+            if (event.target == messageModal) {
+                messageModal.style.display = 'none';
+            }
         });
+
+        // Close message modal
+        if (closeMessageModal) {
+            closeMessageModal.addEventListener('click', function () {
+                messageModal.style.display = 'none';
+            });
+        }
 
         // Send button logic
         if (sendButton) {
             sendButton.addEventListener('click', function () {
-                var userId = recipientDropdown.value;
+                var recipientId = recipientDropdown.value;
                 var messageContent = composeTextarea.value;
 
-                if (userId && messageContent) {
+                if (recipientId && messageContent) {
                     // Send the message via AJAX
-                    var message = {
-                        userId: userId,
-                        senderId: senderId,
-                        messageContent: messageContent
-                    };
-
                     $.ajax({
-                        url: '/Messages/Send', // Adjust the endpoint to your message sending API
+                        url: '/Messages/Send',
                         type: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify(message),
+                        contentType: 'application/json', // Ensure sending JSON payload
+                        data: JSON.stringify({
+                            userId: recipientId,
+                            senderId: senderId,
+                            messageContent: messageContent
+                        }),
                         success: function (response) {
                             alert('Message sent successfully!');
                             // Clear the input fields after sending
@@ -90,36 +100,63 @@
             });
         }
 
-        // Add click event for message cards
-        messageCards.forEach(function (card) {
-            card.addEventListener('click', function () {
-                // Show the message pop-up with details
-                var messageId = this.dataset.messageId;
-                // Fetch and display message details (dummy data for now)
-                alert('Message clicked: ' + messageId);
+        // Function to load messages
+        var loadMessages = function (userId) {
+            $.ajax({
+                url: '/Messages/' + userId, // Adjust the endpoint to your API
+                type: 'GET',
+                success: function (messages) {
+                    chatMessages.innerHTML = ''; // Clear existing messages
+                    messages.forEach(function (message) {
+                        var card = document.createElement('div');
+                        card.className = 'message-card';
+                        card.dataset.messageId = message.id;
+                        card.innerHTML = `
+                            <div class="message-sender">From: ${message.senderId}</div>
+                            <div class="message-content-preview">${message.messageContent.substring(0, 20)}...</div>
+                            <div class="message-timestamp">${new Date(message.timestamp).toLocaleString()}</div>
+                        `;
+                        card.addEventListener('click', function () {
+                            openMessageModal(message);
+                        });
+                        chatMessages.appendChild(card);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    alert('Failed to load messages: ' + error);
+                }
             });
-        });
-    };
+        };
 
-    // Function to load users into the dropdown
-    var loadUsers = function () {
-        $.ajax({
-            url: '/Home/GetUsers', // Adjust the endpoint to your user list API
-            type: 'GET',
-            success: function (users) {
-                var recipientDropdown = document.getElementById('recipientDropdown');
-                recipientDropdown.innerHTML = ''; // Clear existing options
-                users.forEach(function (user) {
-                    var option = document.createElement('option');
-                    option.value = user.id;
-                    option.textContent = user.userName;
-                    recipientDropdown.appendChild(option);
-                });
-            },
-            error: function (xhr, status, error) {
-                alert('Failed to load users: ' + error);
-            }
-        });
+        // Function to open the message modal with details
+        var openMessageModal = function (message) {
+            messageContent.innerHTML = `
+                <h4>From: ${message.senderId}</h4>
+                <p>${message.content}</p>
+                <p><small>Sent on: ${new Date(message.timestamp).toLocaleString()}</small></p>
+            `;
+            messageModal.style.display = 'flex';
+        };
+
+        // Function to load users into the dropdown
+        var loadUsers = function () {
+            $.ajax({
+                url: '/Home/GetUsers', // Adjust the endpoint to your user list API
+                type: 'GET',
+                success: function (users) {
+                    recipientDropdown.innerHTML = ''; // Clear existing options
+                    users.forEach(function (user) {
+                        var option = document.createElement('option');
+                        option.value = user.id;
+                        option.textContent = user.userName;
+                        recipientDropdown.appendChild(option);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    alert('Failed to load users: ' + error);
+                }
+            });
+        };
     };
 
     return {

@@ -65,21 +65,25 @@
     <!-- Chat Panel -->
     <div id="chatPanel" class="chat-panel">
         <div class="chat-header">
-            <h3>Messages</h3>
-            <button id="closeChatPanel">&times;</button>
+            <h4>Your Messages</h4>
+            <button id="closeChatPanel" class="close-button">&times;</button>
         </div>
-        <div class="chat-messages" id="chatMessages">
-            <!-- Messages will be dynamically loaded here -->
+        <div id="chatMessages" class="chat-messages">
+            <!-- Message cards will be dynamically added here -->
         </div>
-        <button id="composeButton" class="compose-button"><i class="fas fa-paper-plane"></i></button>
+        <div class="chat-footer">
+            <button id="composeButton" class="compose-button">
+                <i class="fas fa-paper-plane"></i> Compose
+            </button>
+        </div>
     </div>
 
-    <!-- Message Pop-up Modal -->
+    <!-- Message Modal -->
     <div id="messageModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closeMessageModal">&times;</span>
+            <span id="closeMessageModal" class="close">&times;</span>
             <div id="messageContent">
-                <!-- Message content will be displayed here -->
+                <!-- Message details will be dynamically added here -->
             </div>
         </div>
     </div>

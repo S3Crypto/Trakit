@@ -1,42 +1,29 @@
 @model Trakit.Models.Goal
 
-@{
-    ViewData["Title"] = "Details";
-}
+<h2>Goal Details</h2>
 
-<h1>Details</h1>
+<div class="form-group">
+    <label>Title:</label>
+    <p>@Model.Title</p>
+</div>
+<div class="form-group">
+    <label>Description:</label>
+    <p>@Model.Description</p>
+</div>
+<div class="form-group">
+    <label>Start Date:</label>
+    <p>@Model.StartDate.ToShortDateString()</p>
+</div>
+<div class="form-group">
+    <label>End Date:</label>
+    <p>@Model.EndDate.ToShortDateString()</p>
+</div>
+<div class="form-group">
+    <label>Status:</label>
+    <p>@(Model.IsCompleted ? "Completed" : "In Progress")</p>
+</div>
 
-<div>
-    <h4>Goal</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TargetDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TargetDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a> |
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</p>

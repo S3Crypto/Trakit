@@ -8,6 +8,7 @@ using Trakit.Models;
 namespace Trakit.Controllers
 {
     [Route("[controller]")]
+    [ApiController]
     public class HabitsController : Controller
     {
         private readonly ApplicationDbContext _context;

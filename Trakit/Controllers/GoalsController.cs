@@ -23,12 +23,32 @@ namespace Trakit.Controllers
         // GET: Goals
         public async Task<IActionResult> Index()
         {
-            var userId = _userManager.GetUserId(User); // Get the current logged-in user's ID
+            var userId = _userManager.GetUserId(User);
             var goals = await _context.Goals
                                       .Where(g => g.UserId == userId)
-                                      .ToListAsync(); // Get goals for the logged-in user
+                                      .ToListAsync();
             return View(goals);
         }
+
+        public async Task<IActionResult> Index(string searchString, bool showCompleted = false)
+        {
+            var userId = _userManager.GetUserId(User);
+            var goalsQuery = _context.Goals.Where(g => g.UserId == userId);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                goalsQuery = goalsQuery.Where(g => g.Title.Contains(searchString) || g.Description.Contains(searchString));
+            }
+
+            if (!showCompleted)
+            {
+                goalsQuery = goalsQuery.Where(g => !g.IsCompleted);
+            }
+
+            var goals = await goalsQuery.ToListAsync();
+            return View(goals);
+        }
+
 
         // GET: Goals/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -1,53 +1,68 @@
 @model IEnumerable<Trakit.Models.Goal>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Goals";
+    // Retrieve filter values from the ViewData
+    var currentFilter = ViewData["CurrentFilter"] as string ?? string.Empty;
+    var showCompleted = ViewData["ShowCompleted"] as bool? ?? false;
 }
 
-<h1>Index</h1>
+<h2>Your Goals</h2>
+
+<div class="goals-filter mb-4">
+    <form asp-action="Index" method="get" class="form-inline">
+        <div class="form-group mb-2 mr-2">
+            <input type="text" name="searchString" class="form-control" placeholder="Search for goals..." value="@currentFilter" />
+        </div>
+        <div class="form-group mb-2 mr-2">
+            <label class="form-check-label">
+                <input type="checkbox" name="showCompleted" class="form-check-input" @(showCompleted ? "checked" : "") />
+                Show Completed Goals
+            </label>
+        </div>
+        <button type="submit" class="btn btn-secondary mb-2">Search</button>
+    </form>
+</div>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New Goal</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TargetDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TargetDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="goals-list">
+    @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var goal in Model)
+            {
+                <div class="col-md-4">
+                    <div class="goal-card card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => goal.Title)</h5>
+                            <p class="card-text">@Html.DisplayFor(modelItem => goal.Description)</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Start Date: @goal.StartDate.ToShortDateString() <br />
+                                    End Date: @goal.EndDate.ToShortDateString()
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                <span class="badge @(goal.IsCompleted ? "badge-success" : "badge-warning")">
+                                    @(goal.IsCompleted ? "Completed" : "In Progress")
+                                </span>
+                            </p>
+                            <div class="goal-card-actions">
+                                <a asp-action="Edit" asp-route-id="@goal.Id" class="btn btn-sm btn-secondary">Edit</a>
+                                <a asp-action="Details" asp-route-id="@goal.Id" class="btn btn-sm btn-info">Details</a>
+                                <a asp-action="Delete" asp-route-id="@goal.Id" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No goals found. Try adjusting your search or filter criteria.</p>
+    }
+</div>

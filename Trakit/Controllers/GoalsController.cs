@@ -188,6 +188,7 @@ namespace Trakit.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool GoalExists(int id)
         {
             return _context.Goals.Any(e => e.Id == id);

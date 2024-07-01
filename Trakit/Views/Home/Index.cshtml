@@ -1,25 +1,16 @@
 ﻿@model IEnumerable<Trakit.Models.Goal>
 
-<h2>Your Goals</h2>
+@{
+    ViewData["Title"] = "Home Page";
+}
 
-<form asp-action="Index" method="get">
-    <div class="form-group">
-        <input type="text" name="searchString" class="form-control" placeholder="Search for goals..." value="@ViewData["CurrentFilter"]" />
-    </div>
-    <div class="form-group">
-        <label>
-            <input type="checkbox" name="showCompleted" @(Request.Query["showCompleted"].ToString() == "true" ? "checked" : "") />
-            Show Completed Goals
-        </label>
-    </div>
-    <input type="submit" value="Search" class="btn btn-secondary" />
-</form>
+<div class="jumbotron">
+    <h1>Welcome to Trakit</h1>
+    <p class="lead">Track and manage your goals effectively.</p>
+</div>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New Goal</a>
-</p>
-
-<table class="table">
+<h2>Recent Goals</h2>
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Title</th>
@@ -27,24 +18,19 @@
             <th>Start Date</th>
             <th>End Date</th>
             <th>Status</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var goal in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-                <td>@(item.IsCompleted ? "Completed" : "In Progress")</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
+                <td>@goal.Title</td>
+                <td>@goal.Description</td>
+                <td>@goal.StartDate.ToShortDateString()</td>
+                <td>@goal.EndDate.ToShortDateString()</td>
+                <td>@(goal.IsCompleted ? "Completed" : "In Progress")</td>
             </tr>
         }
     </tbody>
 </table>
+

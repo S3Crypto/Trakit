@@ -32,22 +32,26 @@ namespace Trakit.Controllers
 
         public async Task<IActionResult> Index(string searchString, bool showCompleted = false)
         {
-            var userId = _userManager.GetUserId(User);
-            var goalsQuery = _context.Goals.Where(g => g.UserId == userId);
+            var goals = from g in _context.Goals
+                        select g;
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                goalsQuery = goalsQuery.Where(g => g.Title.Contains(searchString) || g.Description.Contains(searchString));
+                goals = goals.Where(g => g.Title.Contains(searchString));
             }
 
             if (!showCompleted)
             {
-                goalsQuery = goalsQuery.Where(g => !g.IsCompleted);
+                goals = goals.Where(g => !g.IsCompleted);
             }
 
-            var goals = await goalsQuery.ToListAsync();
-            return View(goals);
+            // Store the filter values in ViewData to persist them in the view
+            ViewData["CurrentFilter"] = searchString;
+            ViewData["ShowCompleted"] = showCompleted;
+
+            return View(await goals.ToListAsync());
         }
+
 
 
         // GET: Goals/Details/5
